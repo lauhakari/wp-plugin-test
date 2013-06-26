@@ -11,21 +11,27 @@ class WP_Plugin_Test extends WP_UnitTestCase {
 		parent::setUp();
 	}
 
-function test_change_to_blog() {
+function test_the_content() {
+		$post_content = <<<EOF
+<i>This is the excerpt.</i>
+<!--more-->
+This is the <b>body</b>.
+EOF;
 
-		global $wpdb;
+		$post_id = $this->factory->post->create( compact( 'post_content' ) );
 
-		 $id = 1;
-		 $post = get_post($id);
+		$expected = <<<EOF
+<p><i>This is the excerpt.</i><br />
+<span id="more-{$post_id}"></span><br />
+This is the <b>body</b>.</p>
+EOF;
 
-		 return $post;
-		// return $this->assertObjectHasAttribute('post_date', $post);
-/*
-		$blog_ids = $this->factory->blog->create_many( 4 );
-		foreach ( $blog_ids as $blog_id ) {
-			$this->assertTrue(switch_to_blog($blog_id));
-		}
-*/
+		$this->go_to( get_permalink( $post_id ) );
+		$this->assertTrue( is_single() );
+		$this->assertTrue( have_posts() );
+		$this->assertNull( the_post() );
+
+		$this->assertEquals( strip_ws( $expected ), strip_ws( get_echo( 'the_content' ) ) );
 	}
 
 }
