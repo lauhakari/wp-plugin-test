@@ -12,18 +12,12 @@
 		}
 
 		function test_the_content() {
-			$post_content = '<i>This is the excerpt.</i><!--more-->This is the <b>body</b>.';
 
-			$post_id = $this->factory->post->create( compact( 'post_content' ) );
+			$blog_id = $this->factory->blog->create(array('path' => '/test_blogpath', 'title' => 'Test Title' ));
 
-			$expected = '<p><i>This is the excerpt.</i><br /><span id="more-{$post_id}"></span><br />This is the <b>body</b>.</p>';
 
-			$this->go_to( get_permalink( $post_id ) );
-			$this->assertTrue( is_single() );
-			$this->assertTrue( have_posts() );
-			$this->assertNull( the_post() );
 
-			$this->assertEquals( strip_ws( $expected ), strip_ws( get_echo( 'the_content' ) ) );
+			$this->assertTrue(switch_to_blog( $blog_id ));
 		}
 
 	}
