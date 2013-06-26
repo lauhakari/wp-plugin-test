@@ -15,9 +15,10 @@ function test_change_to_blog() {
 
 		global $wpdb;
 
+		 $id = 1;
+		 $post = get_post($id);
 
-
-		$this->assertObjectHasAttribute('post_date', get_post(1));
+		return $this->assertObjectHasAttribute('post_date', $post);
 /*
 		$blog_ids = $this->factory->blog->create_many( 4 );
 		foreach ( $blog_ids as $blog_id ) {
