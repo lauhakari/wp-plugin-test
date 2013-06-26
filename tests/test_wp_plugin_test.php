@@ -5,6 +5,9 @@
 	 *
 	 * @package wp-plugin-test
 	 */
+
+	if ( is_multisite() ) :
+
 	class WP_Plugin_Test extends WP_UnitTestCase {
 
 		function setUp() {
@@ -23,3 +26,5 @@
 		}
 
 	}
+
+	endif;
