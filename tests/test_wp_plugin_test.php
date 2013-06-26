@@ -17,7 +17,7 @@ function test_change_to_blog() {
 
 
 
-		$this->assertObjectHasAttribute('post_date', get_post(1);
+		$this->assertObjectHasAttribute('post_date', get_post(1));
 /*
 		$blog_ids = $this->factory->blog->create_many( 4 );
 		foreach ( $blog_ids as $blog_id ) {
