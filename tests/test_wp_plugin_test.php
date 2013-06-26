@@ -12,17 +12,11 @@
 		}
 
 		function test_the_content() {
-			$post_content = "EOF
-			<i>This is the excerpt.</i>
-			<!--more-->
-			This is the <b>body</b>.";
+			$post_content = '<i>This is the excerpt.</i><!--more-->This is the <b>body</b>.';
 
 			$post_id = $this->factory->post->create( compact( 'post_content' ) );
 
-			$expected = "
-			<p><i>This is the excerpt.</i><br />
-			<span id="more-{$post_id}"></span><br />
-			This is the <b>body</b>.</p>";
+			$expected = '<p><i>This is the excerpt.</i><br /><span id="more-{$post_id}"></span><br />This is the <b>body</b>.</p>';
 
 			$this->go_to( get_permalink( $post_id ) );
 			$this->assertTrue( is_single() );
