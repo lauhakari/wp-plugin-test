@@ -7,13 +7,22 @@
  */
 class WP_Plugin_Test extends WP_UnitTestCase {
 
+	function setUp() {
+		parent::setUp();
+	}
+
+
+
 
 	function test_change_to_blog() {
-/*		$this->factory->blog->create_many( 3 ); */
 
-/*		$this->assertTrue(switch_to_blog(2)); */
+		global $wpdb;
 
-		$this->assertTrue(TRUE);
+		$blog_ids = $this->factory->blog->create_many( 4 );
+		foreach ( $blog_ids as $blog_id ) {
+			$this->assertTrue(switch_to_blog($blog_id));
+		}
+
 	}
 
 }
